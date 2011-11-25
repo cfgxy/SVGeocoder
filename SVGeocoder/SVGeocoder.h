@@ -40,6 +40,7 @@
 @optional
 - (void)geocoder:(SVGeocoder *)geocoder didFindPlacemark:(SVPlacemark *)placemark; // SVPlacemark is an MKPlacemark subclass with a coordinate property
 - (void)geocoder:(SVGeocoder *)geocoder didFindPlacemarks:(NSArray *)placemarks; // array of SVPlacemark objects
+- (void)geocoder:(SVGeocoder *)geocoder didFindPlacemarksRaw:(NSArray *)placemarks; // array of SVPlacemark raw data
 - (void)geocoder:(SVGeocoder *)geocoder didFailWithError:(NSError *)error;
 
 @end

@@ -153,6 +153,13 @@
 		return;
 	}
     
+    
+    if([(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFindPlacemarksRaw:)]) {
+        [self.delegate geocoder:self didFindPlacemarksRaw:resultsArray];
+        return;
+    }
+    
+    
     for(NSDictionary *placemarkDict in resultsArray) {
 	
         NSDictionary *addressDict = [placemarkDict valueForKey:@"address_components"];
