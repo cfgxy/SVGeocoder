@@ -146,7 +146,7 @@
 	NSDictionary *responseDict = [responseData objectFromJSONData];
 	
     NSArray *resultsArray = [responseDict valueForKey:@"results"];    
- 	NSMutableArray *placemarksArray = [NSMutableArray arrayWithCapacity:[resultsArray count]];
+ 	//NSMutableArray *placemarksArray = [NSMutableArray arrayWithCapacity:[resultsArray count]];
     
 	if(responseDict == nil || resultsArray == nil || [resultsArray count] == 0) {
 		[self connection:connection didFailWithError:jsonError];
@@ -159,7 +159,7 @@
         return;
     }
     
-    
+    /*
     for(NSDictionary *placemarkDict in resultsArray) {
 	
         NSDictionary *addressDict = [placemarkDict valueForKey:@"address_components"];
@@ -214,7 +214,9 @@
         [self.delegate geocoder:self didFindPlacemark:[placemarksArray objectAtIndex:0]];
     
     else if([(NSObject*)self.delegate respondsToSelector:@selector(geocoder:didFindPlacemarks:)])
-        [self.delegate geocoder:self didFindPlacemarks:placemarksArray];
+     [self.delegate geocoder:self didFindPlacemarks:placemarksArray];
+     
+    */
 }
 
 
