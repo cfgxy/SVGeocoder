@@ -14,11 +14,30 @@
 
 #import "SVPlacemark.h"
 
+typedef enum {
+	SVGeocoderZeroResultsError = 1,
+	SVGeocoderOverQueryLimitError,
+	SVGeocoderRequestDeniedError,
+	SVGeocoderInvalidRequestError,
+    SVGeocoderJSONParsingError
+} SVGecoderError;
+
 @protocol SVGeocoderDelegate;
 
-@interface SVGeocoder : NSObject
+@interface SVGeocoder : NSOperation
+
++ (SVGeocoder*)geocode:(NSString *)address completion:(void (^)(NSArray *placemarks, NSError *error))block;
++ (SVGeocoder*)geocode:(NSString *)address bounds:(MKCoordinateRegion)bounds completion:(void (^)(NSArray *placemarks, NSError *error))block;
++ (SVGeocoder*)geocode:(NSString *)address region:(NSString *)region completion:(void (^)(NSArray *placemarks, NSError *error))block;
+
++ (SVGeocoder*)reverseGeocode:(CLLocationCoordinate2D)coordinate completion:(void (^)(NSArray *placemarks, NSError *error))block;
+
+- (void)cancel;
+
+// old API; these methods will soon get deprecated
 
 @property (nonatomic, assign) id<SVGeocoderDelegate> delegate;
+@property (readonly, getter = isQuerying) BOOL querying;
 
 // Reverse Geocoder
 - (SVGeocoder*)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
@@ -29,7 +48,6 @@
 - (SVGeocoder*)initWithAddress:(NSString *)address inRegion:(NSString *)regionString;
 
 - (void)startAsynchronous;
-- (void)cancel;
 
 @end
 
